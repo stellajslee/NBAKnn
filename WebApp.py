@@ -7,7 +7,7 @@ import streamlit as st
 from PIL import Image
 
 # Get data file
-data = pd.read_csv('/Users/stellalee/Desktop/pythonproject/basketball/nba_2020.csv')
+data = pd.read_csv('nba_2020.csv')
 # print(data.shape) # Checking
 
 # Set index to player names
@@ -29,7 +29,7 @@ st.write("""
 """)
 
 # /Users/stellalee/Desktop/pythonproject/basketball/image2.jpg
-image2 = Image.open('/Users/stellalee/Desktop/pythonproject/basketball/image2.jpg')
+image2 = Image.open('image2.jpg')
 st.image(image2, use_column_width = True)
 
 
@@ -159,7 +159,7 @@ st.text('Watch out for notations; refer to the dataset below! i.e. C.J. McCollum
 # ----------------------------------------------------------------------------------------------------------------
 # Show data file used and display some details
 
-image = Image.open('/Users/stellalee/Desktop/pythonproject/basketball/image1.jpg')
+image = Image.open('image1.jpg')
 st.image(image, use_column_width = True)
 
 st.subheader('Details')
