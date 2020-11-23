@@ -80,8 +80,9 @@ search_knn.fit(data_matrix)
 st.subheader('Find 10 NBA players who have the skill sets that you are looking for!')
 # Store user input into a variable
 user_input = get_user_input()
-st.write('Manipulate the statistics using the sidebars. The default is set for James Harden.')
-st.text('Your input: ')
+st.write('Manipulate the values using the sliders on the sidebar. The chart below will show you 10 NBA players '
+         'with the closest performances to the selected statistics. The default is set for James Harden.')
+st.text('Your input: 
 st.write(user_input)
 
 # Create new dataframe with user input
@@ -169,7 +170,7 @@ st.write('I used 2019-20 Regular Season statistics for this program. '
 st.write('I think this program can be useful in finding certain players based on particular strengths and/or '
          'weaknesses. For example, the default is set for James Harden who is very offensively inclined with '
          'the highest 3PM and 3PA. However, he also has the highest turnovers and personal fouls. '
-         'If you want to see a player like Harden but with less TOVs and PFs, simply lower the sidebars '
+         'If you want to see a player like Harden but with less TOVs and PFs, simply lower the sliders '
          'for them, and you can see that Damian Lillard, Kawhi Leonard, and Bradley Beal, etc., would '
          'show up! Addtionally, if you lower some of the score-related stats and bring up ORB, DRB, Steals, '
          'and Blocks, players such as Bam Adebayo, Nikola Jokic, and Anthony Davis, etc., are displayed. ')
