@@ -107,7 +107,7 @@ recommendations_user = []
 
 # Same loops from above
 for player in final_user.index:
-    distances, indices = search_knn_user.kneighbors(final_user.loc[player, :].values.reshape(1, -1), n_neighbors=11)
+    distances, indices = search_knn_user.kneighbors(final_user.loc[player, :].values.reshape(1, -1), n_neighbors = 11)
 
     for elem in range(0, len(distances.flatten())):
         if elem == 0:
@@ -152,7 +152,7 @@ player_name = st.selectbox("Select player", ("LeBron James", "Kawhi Leonard", "J
 findPlayer = recommendations_df[recommendations_df['Target Player'] == player_name]
 st.write(findPlayer)
 
-player_input = st.text_input('Or, look for one yourself! ', value = "Luka Doncic")
+player_input = st.text_input('Or, look for one yourself! ', value = "Type name")
 findFromInput = recommendations_df[recommendations_df['Target Player'] == player_input]
 st.write(findFromInput)
 st.text('Watch out for notations; refer to the dataset below! i.e. C.J. McCollum, Kelly Oubre, Jr.')
