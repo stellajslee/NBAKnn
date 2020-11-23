@@ -82,7 +82,7 @@ st.subheader('Find 10 NBA players who have the skill sets that you are looking f
 user_input = get_user_input()
 st.write('Manipulate the values using the sliders on the sidebar. The chart below will show you 10 NBA players '
          'with the closest performances to the selected statistics. The default is set for James Harden.')
-st.text('Your input: 
+st.text('Your input: ') 
 st.write(user_input)
 
 # Create new dataframe with user input
