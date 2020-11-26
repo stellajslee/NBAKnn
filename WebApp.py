@@ -6,8 +6,10 @@ from scipy.sparse import csr_matrix
 import streamlit as st
 from PIL import Image
 
+# print('No Error')
+
 # Get data file
-data = pd.read_csv('nba_2020.csv')
+data = pd.read_csv('nbastats.csv')
 # print(data.shape) # Checking
 
 # Set index to player names
@@ -15,7 +17,7 @@ data.set_index('Player', drop = True, inplace = True)
 # print(data.head(5)) # Checking
 
 # Drop non-numerical and unnecessary data
-cleaned_data = data.drop(['Stage', 'Team', 'League', 'REB', 'birth_year'], axis = 'columns')
+cleaned_data = data.drop(['Rk', 'Tm', 'GS', 'MP', 'TRB', '3PP', 'FGP', '2PP', 'FTP'], axis = 'columns')
 # print(cleaned_data.head(5)) # Checking
 
 # Normalize data
@@ -34,33 +36,39 @@ st.image(image2, use_column_width = True)
 
 
 # Get user input with a slider
-# Default value is set for Kyle Lowry
 def get_user_input():
-    GP = st.sidebar.slider('Number of Games', 35, 74, 68)
-    MIN = st.sidebar.slider('Minutes', 903, 2557, 2482)
-    FGM = st.sidebar.slider('Field Goals Made', 158, 685, 672)
-    FGA = st.sidebar.slider('Field Goal Attempts', 260, 1514, 1514)
-    TPM = st.sidebar.slider('3 Pointers Made', 0, 299, 299)
-    TPA = st.sidebar.slider('3 Pointer Attempts', 0, 843, 843)
-    FTM = st.sidebar.slider('Free Throws Made', 31, 692, 692)
-    FTA = st.sidebar.slider('Free Throw Attempts', 32, 800, 800)
-    TOV = st.sidebar.slider('Turnovers', 21, 308, 308)
-    PF = st.sidebar.slider('Personal Fouls', 44, 278, 227)
-    ORB = st.sidebar.slider('Offensive Rebounds', 6, 258, 70)
-    DRB = st.sidebar.slider('Defensive Rebounds', 94, 716, 376)
-    AST = st.sidebar.slider('Assists', 36, 684, 512)
-    STL = st.sidebar.slider('Steals', 12, 125, 125)
-    BLK = st.sidebar.slider('Blocks', 0, 196, 60)
-    PTS = st.sidebar.slider('Points', 450, 2335, 2335)
-    Age = st.sidebar.slider('Age', 20, 36, 31)
-    height_cm = st.sidebar.slider('Height(cm)', 175, 221, 196)
-    weight = st.sidebar.slider('Weight(lb)', 172, 279, 220)
+    G = st.sidebar.slider('Number of Games', 42, 82, 78)
+    PTS = st.sidebar.slider('Points', 6.8, 36.1, 36.1)
+    FG = st.sidebar.slider('Field Goals Made', 2.0, 11.0, 10.8)
+    FGA = st.sidebar.slider('Field Goal Attempts', 4.0, 25.0, 24.5)
+    # FGP = st.sidebar.slider('Field Goal %', 0.359, 0.694, 0.442)
+    TP = st.sidebar.slider('3 Pointers Made', 0.0, 6.0, 4.8)
+    TPA = st.sidebar.slider('3 Pointer Attempts', 0.0, 14.0, 13.2)
+    # TPP = st.sidebar.slider('3 Pointer %', 0.000, 0.529, 0.368)
+    WP = st.sidebar.slider('2 Pointers Made', 0.0, 10.0, 6.0)
+    WPA = st.sidebar.slider('2 Pointer Attempts', 1.0, 17.0, 11.3)
+    # WPP = st.sidebar.slider('2 Pointer %', 0.342, 0.699, 0.528)
+    EFG = st.sidebar.slider('Effective Field Goal %', 0.400, 0.700, 0.541)
+    FT = st.sidebar.slider('Free Throws Made', 0.0, 10.0, 9.7)
+    FTA = st.sidebar.slider('Free Throw Attempts', 0.0, 11.0, 11.0)
+    # FTP = st.sidebar.slider('Free Throw %', 0.417, 0.928, 0.879)
+    ORB = st.sidebar.slider('Offensive Rebounds', 0.0, 5.4, 0.8)
+    DRB = st.sidebar.slider('Defensive Rebounds', 1.0, 11.1, 5.8)
+    AST = st.sidebar.slider('Assists', 0.5, 11.0, 7.5)
+    STL = st.sidebar.slider('Steals', 0.1, 2.5, 2.0)
+    BLK = st.sidebar.slider('Blocks', 0.0, 3.0, 0.7)
+    TOV = st.sidebar.slider('Turnovers', 0.3, 5.0, 5.0)
+    PF = st.sidebar.slider('Personal Fouls', 0.5, 4.0, 3.1)
+    Age = st.sidebar.slider('Age', 19, 42, 29)
 
     # Store a dictionary into a variable
-    user_data = { 'GP': GP, 'MIN': MIN, 'FGM': FGM, 'FGA': FGA, '3PM': TPM, '3PA': TPA,
-                  'FTM': FTM, 'FTA': FTA, 'TOV': TOV, 'PF': PF, 'ORB': ORB, 'DRB': DRB, 'AST': AST,
-                  'STL': STL, 'BLK': BLK, 'PTS': PTS, 'Age': Age, 'height_cm': height_cm, 'weight': weight
+    # Rk,Player,Age,Tm,G,GS,MP,FG,FGA,FGP,3P,3PA,3PP,2P,2PA,2PP,eFGP,FT,FTA,FTP,ORB,DRB,TRB,AST,STL,BLK,TOV,PF,PTS
+    user_data = { 'G': G, 'FG': FG, 'FGA': FGA, '3P': TP, '3PA': TPA,
+                  '2P': WP, '2PA': WPA, 'eFGP': EFG, 'FT': FT, 'FTA': FTA,
+                  'ORB': ORB, 'DRB': DRB, 'AST': AST, 'STL': STL, 'BLK': BLK, 'TOV': TOV,
+                  'PF': PF, 'PTS': PTS, 'Age': Age
                   }
+
     # Set index as it will be appended to the dataset
     index = { 'Desired stats' }
 
@@ -81,8 +89,8 @@ st.subheader('Find 10 NBA players who have the skill sets that you are looking f
 # Store user input into a variable
 user_input = get_user_input()
 st.write('Manipulate the values using the sliders on the sidebar. The chart below will show you 10 NBA players '
-         'with the closest performances to the selected statistics. The default is set for James Harden.')
-st.text('Your input: ') 
+         'with the closest performances to the selected statistics per game. The default is set for James Harden.')
+st.text('Your input: ')
 st.write(user_input)
 
 # Create new dataframe with user input
@@ -155,7 +163,7 @@ st.write(findPlayer)
 player_input = st.text_input('Or, look for one yourself! ', value = "Type name")
 findFromInput = recommendations_df[recommendations_df['Target Player'] == player_input]
 st.write(findFromInput)
-st.text('Watch out for notations; refer to the dataset below! i.e. C.J. McCollum, Kelly Oubre, Jr.')
+st.text('Watch out for notations; refer to the dataset below! i.e. CJ McCollum, Kelly Oubre Jr.')
 
 # ----------------------------------------------------------------------------------------------------------------
 # Show data file used and display some details
@@ -164,16 +172,16 @@ image = Image.open('image1.jpg')
 st.image(image, use_column_width = True)
 
 st.subheader('Details')
-st.write('I used 2019-20 Regular Season statistics for this program. '
-         '200 players who led in scoring were selected. All the outputs are determined by '
+st.write('I used 2018-19 season statistics for this program. '
+         '250 players who led in points were selected. All the outputs are determined by '
          'a machine learning method called k-nearest neighbors algorithm (k-NN).')
 st.write('I think this program can be useful in finding certain players based on particular strengths and/or '
-         'weaknesses. For example, the default is set for James Harden who is very offensively inclined with '
-         'the highest 3PM and 3PA. However, he also has the highest turnovers and personal fouls. '
+         'weaknesses. For example, the default is set for James Harden who is very offensively inclined. '
+         'However, he also has higher turnovers and personal fouls. '
          'If you want to see a player like Harden but with less TOVs and PFs, simply lower the sliders '
-         'for them, and you can see that Damian Lillard, Kawhi Leonard, and Bradley Beal, etc., would '
-         'show up! Addtionally, if you lower some of the score-related stats and bring up ORB, DRB, Steals, '
-         'and Blocks, players such as Bam Adebayo, Nikola Jokic, and Anthony Davis, etc., are displayed. ')
+         'for them, and you can see that Damian Lillard, Kemba Walker, and Mike Conley, etc., would '
+         'show up! Additionally, if you lower some of the score-related stats and bring up ORB, DRB, Steals, '
+         'and Blocks, players such as Anthony Davis, Giannis Antetokounmpo, and Nikola Jokic, etc., are displayed. ')
 st.text('Data Used: ')
 st.dataframe(cleaned_data)
 st.write(data.describe())
@@ -181,11 +189,11 @@ st.write(data.describe())
 st.text(' * ')
 
 if st.button('Show key data visualizations'):
-    chart1 = pd.DataFrame(data[0:50], columns = ['PTS', 'REB', 'BLK'])
+    chart1 = pd.DataFrame(data[0:50], columns = ['PTS', 'TRB', 'AST'])
     st.bar_chart(chart1)
-    chart2 = pd.DataFrame(data[51:100], columns=['PTS', 'REB', 'BLK'])
+    chart2 = pd.DataFrame(data[51:100], columns = ['PTS', 'TRB', 'AST'])
     st.bar_chart(chart2)
-    chart3 = pd.DataFrame(data[101:150], columns=['PTS', 'REB', 'BLK'])
+    chart3 = pd.DataFrame(data[101:150], columns = ['PTS', 'TRB', 'AST'])
     st.bar_chart(chart3)
-    chart4 = pd.DataFrame(data[151:200], columns=['PTS', 'REB', 'BLK'])
+    chart4 = pd.DataFrame(data[151:200], columns = ['PTS', 'TRB', 'AST'])
     st.bar_chart(chart4)
