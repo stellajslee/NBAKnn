@@ -180,8 +180,8 @@ st.write('I think this program can be useful in finding certain players based on
          'However, he also has higher turnovers and personal fouls. '
          'If you want to see a player like Harden but with less TOVs and PFs, simply lower the sliders '
          'for them, and you can see that Damian Lillard, Kemba Walker, and Mike Conley, etc., would '
-         'show up! Additionally, if you lower some of the score-related stats and bring up ORB, DRB, Steals, '
-         'and Blocks, players such as Anthony Davis, Giannis Antetokounmpo, and Nikola Jokic, etc., are displayed. ')
+         'show up! Additionally, if you lower some of the score-related stats and bring up ORB, DRB, '
+         'and Blocks, players such as Marc Gasol, Andre Drummond, and Jusuf Nurkic, etc., are displayed. ')
 st.text('Data Used: ')
 st.dataframe(cleaned_data)
 st.write(data.describe())
