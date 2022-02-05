@@ -27,7 +27,7 @@ final_data = pd.DataFrame(index = cleaned_data.index, columns = cleaned_data.col
 
 # Web app title
 st.write("""
-# NBA Recommender Program for Desired Abilities/Players!
+# NBA Player Recommender Program for Desired Abilities!
 """)
 
 # /Users/stellalee/Desktop/pythonproject/basketball/image2.jpg
