@@ -1,3 +1,5 @@
+--no-cache-dir
+
 pandas==1.1.4
 scikit-learn==0.23.2
 scipy==1.7.3
